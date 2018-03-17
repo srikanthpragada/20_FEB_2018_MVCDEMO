@@ -1,0 +1,17 @@
+﻿@model mvcdemo.Models.Course
+@{
+    Layout = "~/Views/Shared/Master.cshtml";
+    ViewBag.Title = "Course Details";
+}
+
+<h1>Title : @Model.Title</h1>
+<h2>Course Fee : @Model.Fee</h2>
+<h2>Course Duration : @Model.Duration</h2>
+<h3>Topics</h3>
+<ul>
+    @foreach (var t in Model.Topics)
+    {
+        <li>@t.ToUpper()</li>
+    }
+</ul>
+

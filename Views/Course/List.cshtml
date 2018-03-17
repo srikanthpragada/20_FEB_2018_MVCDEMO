@@ -1,0 +1,36 @@
+﻿@model IEnumerable<mvcdemo.Models.Course>
+
+@{
+    ViewBag.Title = "List Of Courses";
+}
+
+<table width="100%" border="1">
+    <tr>
+        <th>
+            Title
+        </th>
+        <th>
+            Fee
+        </th>
+        <th>
+            Duration
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var c in Model)
+    {
+        <tr>
+            <td>
+                @c.Title
+            </td>
+            <td>
+                @c.Fee
+            </td>
+            <td>
+                @c.Duration
+            </td>
+        </tr>
+    }
+
+</table>
