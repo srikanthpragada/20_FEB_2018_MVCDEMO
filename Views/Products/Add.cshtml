@@ -1,0 +1,43 @@
+﻿@model mvcdemo.Models.adonet.Product
+
+@{
+    ViewBag.Title = "Add";
+    Layout = "~/Views/Shared/Master.cshtml";
+}
+
+<h2>Add Product</h2>
+
+@using (Html.BeginForm())
+{
+    <div>
+        Product Name
+        <div>
+            @Html.EditorFor(model => model.Name)
+            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <p></p>
+    <div>
+        Product Price
+        <div>
+            @Html.EditorFor(model => model.Price)
+            @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <p></p>
+    <div>
+        Product Category
+        <div>
+            @Html.EditorFor(model => model.Category)
+            @Html.ValidationMessageFor(model => model.Category, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <p></p>
+
+    <input type="submit" value="Add Product" class="btn btn-default" />
+
+    <p></p>
+    @ViewBag.Message
+}
+
