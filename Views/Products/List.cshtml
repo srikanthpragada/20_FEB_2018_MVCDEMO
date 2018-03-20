@@ -43,7 +43,8 @@ else
                     @item.Price
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Id })
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id } , 
+                         new { onclick ="return confirm('Do you want to delete product?')"})
                 </td>
             </tr>
         }

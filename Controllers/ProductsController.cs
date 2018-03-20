@@ -11,7 +11,7 @@ namespace mvcdemo.Controllers
 {
     public class ProductsController : Controller
     {
-        
+
         public ActionResult List()
         {
             // Get data from PRODUCTS table
@@ -51,6 +51,33 @@ namespace mvcdemo.Controllers
             return View(products);
         }
 
+
+        [HttpGet]
+        public ActionResult Delete(String id)
+        {
+            // Delete product with given id 
+            SqlConnection con = new SqlConnection(Database.ConnectionString);
+            try
+            {
+                con.Open();
+                SqlCommand cmd = new SqlCommand
+                    ("delete from products where prodid = @id", con);
+                cmd.Parameters.AddWithValue("@id", id);
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                // Handle error 
+                HttpContext.Trace.Write("Error in ProductController.Delete() : " + ex.Message);
+            }
+            finally
+            {
+                con.Close();
+            }
+
+            return RedirectToAction("List");
+        }
+
         [HttpGet]
         public ActionResult Add()
         {
@@ -62,6 +89,14 @@ namespace mvcdemo.Controllers
         [HttpPost]
         public ActionResult Add(Product prod)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(prod);
+            }
+
+            // Validate data with custom business logic 
+
+
             // Add prod to Products table as a row 
             ViewBag.Message = "";
             SqlConnection con = new SqlConnection(Database.ConnectionString);
@@ -75,7 +110,11 @@ namespace mvcdemo.Controllers
                 cmd.Parameters.AddWithValue("@catcode", prod.Category);
                 int count = cmd.ExecuteNonQuery();
                 if (count == 1)
+                {
                     ViewBag.Message = "Product has been added successfully!";
+                    ModelState.Clear();  // Clear form 
+                    prod = new Product();
+                }
             }
             catch (Exception ex)
             {

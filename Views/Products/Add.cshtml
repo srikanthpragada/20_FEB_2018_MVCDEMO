@@ -5,7 +5,13 @@
     Layout = "~/Views/Shared/Master.cshtml";
 }
 
+@section scripts
+{
+   @Scripts.Render("~/bundles/jqueryval")
+}
+
 <h2>Add Product</h2>
+
 
 @using (Html.BeginForm())
 {
@@ -13,7 +19,7 @@
         Product Name
         <div>
             @Html.EditorFor(model => model.Name)
-            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            @Html.ValidationMessageFor(model => model.Name)
         </div>
     </div>
     <p></p>
@@ -21,7 +27,7 @@
         Product Price
         <div>
             @Html.EditorFor(model => model.Price)
-            @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+            @Html.ValidationMessageFor(model => model.Price)
         </div>
     </div>
     <p></p>
@@ -29,7 +35,7 @@
         Product Category
         <div>
             @Html.EditorFor(model => model.Category)
-            @Html.ValidationMessageFor(model => model.Category, "", new { @class = "text-danger" })
+            @Html.ValidationMessageFor(model => model.Category)
         </div>
     </div>
 
@@ -39,5 +45,7 @@
 
     <p></p>
     @ViewBag.Message
+
+
 }
 

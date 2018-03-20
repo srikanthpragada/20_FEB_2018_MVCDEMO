@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title</title>
-    <link href="~/Content/Site.css" rel="stylesheet" />
+    @Styles.Render("~/Content/css")
 </head>
 <body>
     <div class="banner">ASP.NET MVC DEMO </div>
@@ -16,5 +16,8 @@
     <div>
         @RenderBody()
     </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @RenderSection("scripts", false)
 </body>
 </html>
