@@ -1,0 +1,49 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/Master.cshtml";
+}
+
+@section scripts
+{
+    <script>
+        function gettime() {
+            $.get("/Ajax/Now", {}, showTime);
+        }
+
+        function showTime(result) {
+            $("#time").text(result);
+        }
+
+        function beginTime() {
+            console.log("About to begin ajax request...");
+        }
+    </script>
+
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+}
+<h2>Ajax Demo</h2>
+
+<h2 id="time"></h2>
+<button onclick="gettime()">Get Time</button>
+<p></p>
+@Ajax.ActionLink("Get Date and Time", "Now", 
+         new AjaxOptions { UpdateTargetId = "time",
+         OnBegin ="beginTime()" })
+
+
+<h3>Ajax Form</h3>
+
+@using (Ajax.BeginForm("Add", new AjaxOptions { UpdateTargetId = "sum" }))
+{
+    <div>First Number</div>
+    <input type="text" name="n1" />
+    <p></p>
+    <div>Second Number</div>
+    <input type="text" name="n2" />
+    <p></p>
+    <input type="submit" value="Add Numbers" />
+    <p></p>
+    <h2 id="sum"></h2>
+
+}
