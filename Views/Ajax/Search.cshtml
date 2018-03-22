@@ -1,0 +1,38 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/Master.cshtml";
+}
+
+@section scripts
+{
+    <script>
+        function beginSearch() {
+            $("#ajaxicon").css("visibility", "visible");
+        }
+        function endSearch() {
+            $("#ajaxicon").css("visibility", "hidden");
+        }
+    </script>
+
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+}
+<h2>Product Search</h2>
+
+@using (Ajax.BeginForm("SearchProducts", new AjaxOptions
+{
+    OnBegin = "beginSearch",
+    OnComplete = "endSearch",
+    UpdateTargetId = "products",
+}))
+{
+    <span>Product Name </span>
+    <input type="text" name="prodname" />
+    <input type="submit" value="Search" /> 
+    <img id="ajaxicon" src="~/Content/ajax-loader.gif" style="visibility:hidden" />
+    <p></p>
+    <div id="products"></div>
+
+}
+
+

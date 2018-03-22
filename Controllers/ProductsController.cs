@@ -9,12 +9,14 @@ using System.Web.Mvc;
 
 namespace mvcdemo.Controllers
 {
+    [Authorize]
     public class ProductsController : Controller
     {
-
+        [OutputCache (Duration=60)]
         public ActionResult List()
         {
             // Get data from PRODUCTS table
+            ViewBag.Timestamp = DateTime.Now.ToString();
             ViewBag.Message = "";
             var products = new List<Product>();
             SqlConnection con = new SqlConnection(Database.ConnectionString);

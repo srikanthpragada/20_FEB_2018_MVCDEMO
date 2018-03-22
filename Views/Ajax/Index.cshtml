@@ -27,9 +27,30 @@
 <h2 id="time"></h2>
 <button onclick="gettime()">Get Time</button>
 <p></p>
-@Ajax.ActionLink("Get Date and Time", "Now", 
-         new AjaxOptions { UpdateTargetId = "time",
-         OnBegin ="beginTime()" })
+@Ajax.ActionLink("Get Date and Time", "Now",
+         new AjaxOptions
+         {
+             UpdateTargetId = "time",
+             OnBegin = "beginTime()"
+         })
+
+<h3>Search Products</h3>
+
+@using (Ajax.BeginForm("Search", new AjaxOptions
+{
+    OnBegin = "beginSearch",
+    OnComplete = "endSearch",
+    UpdateTargetId = "products"
+}))
+{
+    <span>Product Name </span>
+    <input type="text" name="prodname" />
+    <input type="submit" value="Search" /> <img src="~/Content/ajax-loader.gif" style="display:none" />
+    <p></p>
+    <div id="products"></div>
+
+}
+
 
 
 <h3>Ajax Form</h3>
