@@ -208,10 +208,11 @@
     <Content Include="Views\Ajax\Index.cshtml" />
     <Content Include="Views\Ajax\Search.cshtml" />
     <Content Include="Views\Ajax\SearchProducts.cshtml" />
+    <Content Include="Views\User\Login.cshtml" />
+    <Content Include="Views\User\Home.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\User\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
