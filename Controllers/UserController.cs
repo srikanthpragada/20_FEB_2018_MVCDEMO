@@ -27,7 +27,8 @@ namespace mvcdemo.Controllers
             if (pwd == "admin")
             {
                 FormsAuthentication.SetAuthCookie("admin", false);
-                return RedirectToAction("Home");
+                // Redirect user to url that user wanted to go to
+                return Redirect(Request.QueryString["ReturnUrl"]);  
             }
             else
                 ViewBag.Message = "Sorry! Invaid Login. Try Again!";
