@@ -1,0 +1,50 @@
+﻿@model IEnumerable<mvcdemo.Models.ef.Category>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>List Of Categories</title>
+</head>
+<body>
+    <h2>List Of Categories</h2>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Code)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th></th>
+        </tr>
+    
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @item.Code  
+            </td>
+            <td>
+                @item.Description  
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Code }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Code },
+                                   new { onclick = "return confirm('Do you want to delete category?')" } )
+            </td>
+        </tr>
+    }
+    
+    </table>
+    <p></p>
+    @TempData["Message"]
+</body>
+</html>

@@ -1,0 +1,49 @@
+﻿@model mvcdemo.Models.ef.Category
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Create Category</title>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+
+        function checkCode() {
+            alert("Checking code ...");
+        }
+    </script>
+</head>
+<body>
+    <h2>Create Category</h2>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div>Category Code </div>
+        <div>
+            @Html.TextBoxFor(model => model.Code, new { onblur="checkCode()"})
+            @Html.ValidationMessageFor(model => model.Code, "")
+        </div>
+        <p></p>
+        <div>Category Description </div>
+        <div>
+            @Html.EditorFor(model => model.Description)
+            @Html.ValidationMessageFor(model => model.Description, "")
+        </div>
+        <p/>
+        <input type="submit" value="Create" class="btn btn-default" />
+        <p></p>
+        @ViewBag.Message 
+        <p></p>
+    }
+
+    <div>
+        @Html.ActionLink("List Of Categories", "Index")
+    </div>
+</body>
+</html>

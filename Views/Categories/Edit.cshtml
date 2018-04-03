@@ -1,0 +1,33 @@
+﻿@model mvcdemo.Models.ef.Category
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Edit Category</title>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+</head>
+<body>
+    <h2>Edit Category</h2>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+            @Html.HiddenFor(model => model.Code)
+            <span>Description : </span>
+            @Html.EditorFor(model => model.Description)
+            @Html.ValidationMessageFor(model => model.Description,"")
+            <p></p>
+            <input type="submit" value="Save"/>
+    }
+    
+    <p></p>
+    @Html.ActionLink("List Products", "Index")
+
+</body>
+</html>
