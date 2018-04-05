@@ -1,0 +1,82 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Category Client</title>
+    <script src="Scripts/jquery-1.10.2.js"></script>
+    <script>
+        function getCategories() {
+            $.getJSON("/api/RestCategory", {},
+                function (categories) {
+                    // console.log(categories)
+                    output = "<ul>";
+                    $.each(categories,
+                        function (index,cat) {
+                            output += "<li>" + cat.Code + " - " + cat.Description + "</li>";
+                        }
+                    );
+
+                    output += "</ul>";
+                    $("#categories").html(output);
+                }
+            );
+        }
+
+        function deleteCategory() {
+            if (!confirm('Do you really want to delete category?'))
+                return;
+
+            $.ajax(
+                {
+                    url: "/api/RestCategory/" + $("#code").val(),
+                    method : "delete",
+                    success:
+                       function () {
+                           $("#message").text("Deleted!")
+                    },
+                    error :
+                    function () {
+                        $("#message").text("Sorry! Could not delete category!")
+                    }
+                }
+            );
+              
+        }
+
+        function addCategory() {
+            $("#message").html("Processing...");
+            $.ajax(
+                {
+                    url: "/api/RestCategory",
+                    data: { "Code" : $("#code").val(), "Description" : $("#description").val()},
+                    method: "post",
+                    success:
+                       function () {
+                          $("#message").text("Added Successfully!")
+                       },
+                    error:
+                       function () {
+                          $("#message").text("Sorry! Could not add category!")
+                       }
+                }
+            );
+
+        }
+
+    </script>
+</head>
+<body>
+    <h2>Category</h2>
+    <input type="text" id="code" />
+    <input type="text" id="description" />
+    <button onclick="addCategory()">Add</button>
+    <button onclick="deleteCategory()">Delete</button>
+    <span id="message"></span>
+    <p />
+    <button onclick="getCategories()">Get All Categories</button>
+    <div id="categories">
+
+    </div>
+
+</body>
+</html>

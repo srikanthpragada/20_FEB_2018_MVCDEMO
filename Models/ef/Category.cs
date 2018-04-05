@@ -12,10 +12,12 @@ namespace mvcdemo.Models.ef
     {
         [Key]
         [Required]
+        [MinLength(2)]
         [Column("catcode")]
         public string Code { get; set; }
 
         [Column("catdesc")]
+        [MinLength(3)]
         [Required]
         public string Description { get; set; }
     }

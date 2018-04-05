@@ -20,7 +20,21 @@ namespace mvcdemo.Controllers
             return View(db.Categories.ToList());
         }
 
-        
+        public ActionResult Search()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Search(string text)
+        {
+            var result = from c in db.Categories
+                         where c.Code.Contains(text) || c.Description.Contains(text)
+                         select c;
+
+            return PartialView("_search",result);
+        }
+
+
         // GET: Categories/Create
         public ActionResult Create()
         {

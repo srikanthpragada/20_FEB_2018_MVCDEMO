@@ -1,0 +1,22 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Hello Client</title>
+    <script src="Scripts/jquery-1.10.2.js"></script>
+    <script>
+        function callHello() {
+            $.get("/api/Rest", {},
+                function (result) {
+                    $("#message").text(result);
+                }
+            );
+        }
+    </script>
+</head>
+<body>
+    <button onclick="callHello()">Call Hello Service</button>
+    <h2 id="message"></h2>
+
+</body>
+</html>
