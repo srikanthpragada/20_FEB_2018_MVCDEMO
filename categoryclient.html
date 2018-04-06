@@ -22,6 +22,23 @@
             );
         }
 
+        function getCategory() {
+            $("#message").text("");
+            $("#description").val("");
+            $.ajax({
+                dataType: "json",
+                url: "/api/RestCategory/" + $("#code").val(),
+                success: 
+                   function (category) {
+                      $("#description").val(category.Description)
+                    },
+                error:
+                   function () {
+                      $("#message").text("Sorry! Code not found!");
+                   }
+            });
+        }
+
         function deleteCategory() {
             if (!confirm('Do you really want to delete category?'))
                 return;
@@ -63,14 +80,37 @@
 
         }
 
+
+        function updateCategory() {
+            $("#message").html("Processing...");
+            $.ajax(
+                {
+                    url: "/api/RestCategory/" + $("#code").val(),
+                    data: { "Code": $("#code").val(), "Description": $("#description").val() },
+                    method: "put",
+                    success:
+                    function () {
+                        $("#message").text("Updated Successfully!")
+                    },
+                    error:
+                    function () {
+                        $("#message").text("Sorry! Could not update category!")
+                    }
+                }
+            );
+
+        }
+
     </script>
 </head>
 <body>
     <h2>Category</h2>
     <input type="text" id="code" />
     <input type="text" id="description" />
+    <button onclick="getCategory()">Get</button>
     <button onclick="addCategory()">Add</button>
     <button onclick="deleteCategory()">Delete</button>
+    <button onclick="updateCategory()">Update</button>
     <span id="message"></span>
     <p />
     <button onclick="getCategories()">Get All Categories</button>

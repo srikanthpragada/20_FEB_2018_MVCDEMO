@@ -168,6 +168,7 @@
     <Compile Include="Controllers\RestCategoryController.cs" />
     <Compile Include="Controllers\RestController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Controllers\V2Controller.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

@@ -6,6 +6,7 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Web;
 using System.Web.Http;
 using System.Web.Http.Description;
 using mvcdemo.Models.ef;
@@ -44,27 +45,19 @@ namespace mvcdemo.Controllers
                 return BadRequest(ModelState);
             }
 
-            if (id != category.Code)
-            {
-                return BadRequest();
-            }
-
-            db.Entry(category).State = EntityState.Modified;
+            var cat = db.Categories.Find(id);
+            if (cat == null)
+                return NotFound();
 
             try
             {
-                db.SaveChanges();
+                cat.Description = category.Description;   // Modify
+                db.SaveChanges();   // Update is executed 
             }
-            catch (DbUpdateConcurrencyException)
+            catch (Exception ex) 
             {
-                if (!CategoryExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                HttpContext.Current.Trace.Write("Error in PutCategory : " + ex.InnerException.Message);
+                return InternalServerError(ex);
             }
 
             return StatusCode(HttpStatusCode.NoContent);
